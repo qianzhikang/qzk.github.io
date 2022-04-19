@@ -4,12 +4,16 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="第一篇博客~, blogs from qzk">
-    <meta name="description" content="自我介绍我是一名大三的在读学生，基于Hexo搭建了博客挂载在Github上。这个博客主要用于分享和记录一些学习心得和笔记。
-目的立个flag,此后会坚持不定时的往上分享学习记录和日记等等。
+    <meta name="keywords" content="GitHub本地SSH配置~, blogs from qzk">
+    <meta name="description" content="博客搭建需要前置的本地环境：
 
-借此机会，希望可以养成记录习惯！
-">
+Node.js
+npm
+github账号
+git（本地设置了远程ssh连接）
+
+关于Hexo官网：Hexo
+Hexo是⾼效的静态站点⽣成框架，它基于Node.js。通过Hexo，你可以直接使⽤Markdown">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -32,7 +36,7 @@
     </style>
 
 
-    <title>第一篇博客~ | blogs from qzk</title>
+    <title>GitHub本地SSH配置~ | blogs from qzk</title>
     <link rel="icon" type="image/png" href="/qzk.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/qzk.github.io/libs/awesome/css/all.min.css">
@@ -237,12 +241,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/qzk.github.io/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/qzk.github.io/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">第一篇博客~</h1>
+                    <h1 class="description center-align post-title">GitHub本地SSH配置~</h1>
                 </div>
             </div>
         </div>
@@ -358,8 +362,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/qzk.github.io/tags/%E4%BB%8B%E7%BB%8D/">
-                                <span class="chip bg-color">介绍</span>
+                            <a href="/qzk.github.io/tags/%E6%95%99%E7%A8%8B/">
+                                <span class="chip bg-color">教程</span>
                             </a>
                         
                     </div>
@@ -374,7 +378,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-19
+                    2022-04-20
                 </div>
                 
 
@@ -395,10 +399,121 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>我是一名大三的在读学生，基于<code>Hexo</code>搭建了博客挂载在<code>Github</code>上。这个博客主要用于分享和记录一些学习心得和笔记。</p>
-<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>立个flag,此后会坚持不定时的往上分享学习记录和日记等等。</p>
-<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204192302457.jpg" alt="坚持到底！"></p>
-<p>借此机会，希望可以养成记录习惯！</p>
+                <h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>需要前置的本地环境：</p>
+<ul>
+<li>Node.js</li>
+<li>npm</li>
+<li>github账号</li>
+<li>git（本地设置了远程ssh连接）</li>
+</ul>
+<h2 id="关于Hexo"><a href="#关于Hexo" class="headerlink" title="关于Hexo"></a>关于Hexo</h2><p>官网：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a></p>
+<p><code>Hexo</code>是⾼效的静态站点⽣成框架，它基于Node.js。通过Hexo，你可以直接使⽤Markdown语法来撰写 博客。相信你肯定写过README.md⽂件吧，对，就是这个格式的&#x3D;！写完后只需两三条命令即可将⽣ 成的⽹⻚上传到你的github上，然后别⼈就可以看到你的⽹⻚啦。是不是很简单？你⽆需关⼼⽹⻚源代 码的具体细节，你只需要⽤⼼写好你的博客内容就⾏。</p>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><blockquote>
+<ol>
+<li>全局安装<code>Hexo</code>，任意地⽅打开终端，安装Hexo。</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-cli -g </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ol start="2">
+<li>初始化博客文件夹，任意地方打开终端初始化文件夹</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init ‘文件夹名’</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ol start="3">
+<li>安装依赖</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h2 id="Hexo生成静态页面"><a href="#Hexo生成静态页面" class="headerlink" title="Hexo生成静态页面"></a>Hexo生成静态页面</h2><h3 id="Hexo命令"><a href="#Hexo命令" class="headerlink" title="Hexo命令"></a>Hexo命令</h3><blockquote>
+<p>新建一个博客编辑文件，将会在<code>/source/_posts</code>下生成一个md文件，用于编辑博客</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;文件名&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>生成静态网页，将<code>/source/_posts</code>下的md文件生成为静态html的网页</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>启动⼀个本地服务器，端⼝默认<code>4000</code></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p><code>清除/public目录下的所有文件，非必要情况请勿使用！</code></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="本地访问生成的博客页面"><a href="#本地访问生成的博客页面" class="headerlink" title="本地访问生成的博客页面"></a>本地访问生成的博客页面</h3><p>浏览器打开<a target="_blank" rel="noopener" href="http://localhost:4000/%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E5%8D%9A%E5%AE%A2%E5%95%A6%EF%BC%8C%E6%95%88%E6%9E%9C%E5%A6%82%E4%B8%8B">http://localhost:4000/，就可以看到博客啦，效果如下</a></p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204192332355.png" alt="image-20220419233250273"></p>
+<h2 id="修改博客主题"><a href="#修改博客主题" class="headerlink" title="修改博客主题"></a>修改博客主题</h2><p><em>这里以 <code>Matery</code> 主题为例。</em></p>
+<p><em>主题仓库：<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery">https://github.com/blinkfox/hexo-theme-matery</a></em></p>
+<blockquote>
+<p>下载主题源码，解压缩后，将 <code>hexo-theme-matery</code> 的文件夹复制到你 Hexo 的 <code>themes</code> 文件夹中。</p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204192347005.png" alt="image-20220419234750932"></p>
+<blockquote>
+<p>修改 Hexo 根目录（注意不是主题文件夹下的）下的 <code>_config.yml</code> 的 <code>theme</code> 的值：<code>theme: hexo-theme-matery</code>(上一步拖进去的文件夹的名字)</p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204192350014.png" alt="image-20220419235029954"></p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204192351163.png" alt="image-20220419235123086"></p>
+<p>更具这个主题的介绍，修改一些参数：</p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204192354562.png" alt="image-20220419235413487"></p>
+<h3 id="主题的一些个性化配置"><a href="#主题的一些个性化配置" class="headerlink" title="主题的一些个性化配置"></a>主题的一些个性化配置</h3><p>这部分只说明需要修改的文件位置，具体的配置修改可以看向主题官方文档。</p>
+<p>官网链接：<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md">Matery中文说明文档</a></p>
+<blockquote>
+<p>这部分的修改都是在主题文件夹中修改，需要修改的文件在<code>/themes/hexo-theme-matery/_config.yml</code></p>
+</blockquote>
+<h2 id="推送-Github-并挂载"><a href="#推送-Github-并挂载" class="headerlink" title="推送 Github 并挂载"></a>推送 Github 并挂载</h2><h3 id="推送博客到Github"><a href="#推送博客到Github" class="headerlink" title="推送博客到Github"></a>推送博客到Github</h3><p>如果你已经有了Github的账号，并且本地配置了 git 的 <code>SSH key</code>, 就可以进行推送阶段了。</p>
+<blockquote>
+<p>这里需要一个插件，⽤于向github仓库发布内容，在hexo博客的根目录下，起终端执行安装命令：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>配置远程仓库的git地址，修改hexo博客根目录下的<code>_config.yml</code></p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204200018795.png" alt="image-20220420001818727"></p>
+<blockquote>
+<p>在项目更目录下执行命令进行推送</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="设置GitHub-Pages挂载博客"><a href="#设置GitHub-Pages挂载博客" class="headerlink" title="设置GitHub Pages挂载博客"></a>设置GitHub Pages挂载博客</h3><blockquote>
+<p>来到仓库设置页面</p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204200024748.png" alt="image-20220420002427711"></p>
+<blockquote>
+<p> 选择page设置，将<code>Sourece</code>设置为主分支</p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204200032754.png" alt="image-20220420003241683"></p>
+<h2 id="解决挂载后CSS失效问题"><a href="#解决挂载后CSS失效问题" class="headerlink" title="解决挂载后CSS失效问题"></a>解决挂载后CSS失效问题</h2><p>使用<code>github page</code>挂载的页面可能会出现css失效的问题，这里需要对本地进行一些配置。</p>
+<blockquote>
+<p>修改hexo博客根目录下的<code>_config.yml</code></p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204200023768.png" alt="url配置"></p>
+<blockquote>
+<p>这里的url 设置的规则为：<code>https://你的github用户名.github.io/你的仓库名</code></p>
+</blockquote>
+<p>完成以上配置后，再次<code>hexo g</code>生成一下页面进行更新，再使用<code>hexo d</code>推送即可。</p>
+<p><em>推送成功后，访问页面可能会有一些延迟，可以稍微等个2分钟！</em></p>
 
                 
             </div>
@@ -425,7 +540,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qianzhikang.github.io/qzk.github.io/qzk.github.io/2022/04/19/hello-blog/">https://qianzhikang.github.io/qzk.github.io/qzk.github.io/2022/04/19/hello-blog/</a>
+                    <a href="https://qianzhikang.github.io/qzk.github.io/qzk.github.io/2022/04/20/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/">https://qianzhikang.github.io/qzk.github.io/qzk.github.io/2022/04/20/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -463,8 +578,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/qzk.github.io/tags/%E4%BB%8B%E7%BB%8D/">
-                                    <span class="chip bg-color">介绍</span>
+                                <a href="/qzk.github.io/tags/%E6%95%99%E7%A8%8B/">
+                                    <span class="chip bg-color">教程</span>
                                 </a>
                             
                         </div>
@@ -509,9 +624,56 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/qzk.github.io/2022/04/20/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/qzk.github.io/medias/featureimages/20.jpg" class="responsive-img" alt="GitHub本地SSH配置~">
+                        
+                        <span class="card-title">GitHub本地SSH配置~</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            qzk
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/qzk.github.io/tags/%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">教程</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/qzk.github.io/2022/04/20/GitHub%E6%9C%AC%E5%9C%B0SSH%E9%85%8D%E7%BD%AE/">
                     <div class="card-image">
@@ -529,9 +691,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -545,52 +707,6 @@
                     
                     <a href="/qzk.github.io/tags/%E6%95%99%E7%A8%8B/">
                         <span class="chip bg-color">教程</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/qzk.github.io/2022/04/19/hello-blog/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/qzk.github.io/medias/featureimages/5.jpg" class="responsive-img" alt="第一篇博客~">
-                        
-                        <span class="card-title">第一篇博客~</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-19
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            qzk
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/qzk.github.io/tags/%E4%BB%8B%E7%BB%8D/">
-                        <span class="chip bg-color">介绍</span>
                     </a>
                     
                 </div>
