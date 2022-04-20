@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="GitHub本地SSH配置~, blogs from qzk">
+    <meta name="keywords" content="博客搭建教程, blogs from qzk">
     <meta name="description" content="博客搭建需要前置的本地环境：
 
 Node.js
@@ -36,7 +36,7 @@ Hexo是⾼效的静态站点⽣成框架，它基于Node.js。通过Hexo，你�
     </style>
 
 
-    <title>GitHub本地SSH配置~ | blogs from qzk</title>
+    <title>博客搭建教程 | blogs from qzk</title>
     <link rel="icon" type="image/png" href="/qzk.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/qzk.github.io/libs/awesome/css/all.min.css">
@@ -241,12 +241,12 @@ Hexo是⾼效的静态站点⽣成框架，它基于Node.js。通过Hexo，你�
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/qzk.github.io/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/qzk.github.io/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">GitHub本地SSH配置~</h1>
+                    <h1 class="description center-align post-title">博客搭建教程</h1>
                 </div>
             </div>
         </div>
@@ -394,6 +394,9 @@ Hexo是⾼效的静态站点⽣成框架，它基于Node.js。通过Hexo，你�
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/qzk.github.io/libs/prism/prism.css">
+        
 
         
 
@@ -413,47 +416,47 @@ Hexo是⾼效的静态站点⽣成框架，它基于Node.js。通过Hexo，你�
 <li>全局安装<code>Hexo</code>，任意地⽅打开终端，安装Hexo。</li>
 </ol>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-cli -g </span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i hexo-cli -g <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <blockquote>
 <ol start="2">
 <li>初始化博客文件夹，任意地方打开终端初始化文件夹</li>
 </ol>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init ‘文件夹名’</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo init ‘文件夹名’<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <blockquote>
 <ol start="3">
 <li>安装依赖</li>
 </ol>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="Hexo生成静态页面"><a href="#Hexo生成静态页面" class="headerlink" title="Hexo生成静态页面"></a>Hexo生成静态页面</h2><h3 id="Hexo命令"><a href="#Hexo命令" class="headerlink" title="Hexo命令"></a>Hexo命令</h3><blockquote>
 <p>新建一个博客编辑文件，将会在<code>/source/_posts</code>下生成一个md文件，用于编辑博客</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;文件名&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo new post <span class="token string">"文件名"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
 <blockquote>
 <p>生成静态网页，将<code>/source/_posts</code>下的md文件生成为静态html的网页</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo g<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
 <blockquote>
 <p>启动⼀个本地服务器，端⼝默认<code>4000</code></p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo s<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
 <blockquote>
 <p><code>清除/public目录下的所有文件，非必要情况请勿使用！</code></p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo clean<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
@@ -481,7 +484,7 @@ Hexo是⾼效的静态站点⽣成框架，它基于Node.js。通过Hexo，你�
 <blockquote>
 <p>这里需要一个插件，⽤于向github仓库发布内容，在hexo博客的根目录下，起终端执行安装命令：</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i hexo-deployer-git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
@@ -492,7 +495,7 @@ Hexo是⾼效的静态站点⽣成框架，它基于Node.js。通过Hexo，你�
 <blockquote>
 <p>在项目更目录下执行命令进行推送</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo d<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
 
@@ -633,9 +636,9 @@ Hexo是⾼效的静态站点⽣成框架，它基于Node.js。通过Hexo，你�
                     <div class="card-image">
                         
                         
-                        <img src="/qzk.github.io/medias/featureimages/20.jpg" class="responsive-img" alt="GitHub本地SSH配置~">
+                        <img src="/qzk.github.io/medias/featureimages/23.jpg" class="responsive-img" alt="博客搭建教程">
                         
-                        <span class="card-title">GitHub本地SSH配置~</span>
+                        <span class="card-title">博客搭建教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -679,9 +682,9 @@ Hexo是⾼效的静态站点⽣成框架，它基于Node.js。通过Hexo，你�
                     <div class="card-image">
                         
                         
-                        <img src="/qzk.github.io/medias/featureimages/20.jpg" class="responsive-img" alt="GitHub本地SSH配置~">
+                        <img src="/qzk.github.io/medias/featureimages/22.jpg" class="responsive-img" alt="GitHub本地SSH配置">
                         
-                        <span class="card-title">GitHub本地SSH配置~</span>
+                        <span class="card-title">GitHub本地SSH配置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">

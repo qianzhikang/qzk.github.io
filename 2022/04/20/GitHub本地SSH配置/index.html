@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="GitHub本地SSH配置~, blogs from qzk">
+    <meta name="keywords" content="GitHub本地SSH配置, blogs from qzk">
     <meta name="description" content="GitHub本地SSH配置需要前置环境：
 
 git
@@ -13,7 +13,8 @@ github账号
 
 ⾸先右键打开git bash，然后输⼊下⾯命令：
 
-12git config --global user.name &amp;quot;你的githb⽤户名&amp;quot;git">
+git config --global user.name &#34;你的githb⽤户名&#34;
+git config --g">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -36,7 +37,7 @@ github账号
     </style>
 
 
-    <title>GitHub本地SSH配置~ | blogs from qzk</title>
+    <title>GitHub本地SSH配置 | blogs from qzk</title>
     <link rel="icon" type="image/png" href="/qzk.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/qzk.github.io/libs/awesome/css/all.min.css">
@@ -241,12 +242,12 @@ github账号
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/qzk.github.io/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/qzk.github.io/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">GitHub本地SSH配置~</h1>
+                    <h1 class="description center-align post-title">GitHub本地SSH配置</h1>
                 </div>
             </div>
         </div>
@@ -394,6 +395,9 @@ github账号
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/qzk.github.io/libs/prism/prism.css">
+        
 
         
 
@@ -407,14 +411,15 @@ github账号
 <blockquote>
 <p>⾸先右键打开git bash，然后输⼊下⾯命令：</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的githb⽤户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的github邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config --global user.name <span class="token string">"你的githb⽤户名"</span>
+<span class="token function">git</span> config --global user.email <span class="token string">"你的github邮箱"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 
 
 <blockquote>
 <p>输入命令生成ssh key，然后一路回车即可，表示都使用默认值（如果不想使用默认值，则根据提示输入对应的值即可，比如密钥文件的存放路径、密码等信息），之后在用户目录的 <code>.ssh</code> 文件夹下会自动生成 包含私钥的文件 <code>id_rsa</code> 和包含公钥的文件 <code>id_rsa.pub</code> 。</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你的github邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen -t rsa -C <span class="token string">"你的github邮箱"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204200041943.png" alt="生成SSH密钥"></p>
 <p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204200042471.png" alt="生成的密钥文件"></p>
@@ -541,9 +546,9 @@ github账号
                     <div class="card-image">
                         
                         
-                        <img src="/qzk.github.io/medias/featureimages/20.jpg" class="responsive-img" alt="GitHub本地SSH配置~">
+                        <img src="/qzk.github.io/medias/featureimages/23.jpg" class="responsive-img" alt="博客搭建教程">
                         
-                        <span class="card-title">GitHub本地SSH配置~</span>
+                        <span class="card-title">博客搭建教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
