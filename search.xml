@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>关于云服务器上的Redis</title>
+      <link href="/qzk.github.io/2022/04/24/%E5%85%B3%E4%BA%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/"/>
+      <url>/qzk.github.io/2022/04/24/%E5%85%B3%E4%BA%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/</url>
+      
+        <content type="html"><![CDATA[<h1 id="使用可视化工具连接云服务器Redis失败？"><a href="#使用可视化工具连接云服务器Redis失败？" class="headerlink" title="使用可视化工具连接云服务器Redis失败？"></a>使用可视化工具连接云服务器Redis失败？</h1><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>在云服务器上使用Docker安装Redis,想要实现向MySQL一样，可以远程可视化访问。可视化工具使用<code>Another Redis Desktop Manager</code>,初次尝试连接失败了，原因是<code>远程的Redis默认不支持远程访问</code>。</p><h2 id="安装并修改权限"><a href="#安装并修改权限" class="headerlink" title="安装并修改权限"></a>安装并修改权限</h2><h3 id="使用Docker安装Redis"><a href="#使用Docker安装Redis" class="headerlink" title="使用Docker安装Redis"></a>使用Docker安装Redis</h3><ol><li><p>拉取redis</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull redis<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>创建文件</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> /home/docker/redis/<span class="token punctuation">&#123;</span>conf,data<span class="token punctuation">&#125;</span> -p<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>本地下载对应版本的redis，拷贝redis.conf，并修改部分内容 </p><p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204240109751.png" alt="redis.conf文件位置"></p><blockquote><p>更改redis.conf配置文件（更改前建议先备份原始文件，更改备份后的文件）：</p><ol><li>注释 <code>bind 127.0.0.1</code>。这里限制redis只能本地访问，注释掉之后使redis可以外部访问；</li><li><code>protected-mode yes</code> 修改为 protected-mode no。默认yes，开启保护模式，限制仅本地访问，改为no之后使redis可以外部访问；</li><li><code>daemonize no</code> 。默认no，当前界面将进入redis的命令行界面，exit强制退出或者关闭连接工具(putty,xshell等)都会导致redis进程退出。 改为yes意为以守护进程方式启动，该模式下，redis会在后台运行，并将进程pid号写入至redis.conf选项pidfile设置的文件中，此时redis将一直运行，除非手动kill该进程，如果改为yes会使以配置文件方式启动redis的方式失败。</li><li><code>requirepass pwd</code>。这里的pwd是自己设置的密码，可以不开启，不开启表示无需密码即可连接。</li><li><code>databases 16</code>。默认数据库个数16，可以不修改。</li><li><code>appendonly no</code>。默认 no，表示不开启aof方式持久化，改为appendonly yes表示开启aof，可以不修改该配置。</li></ol><p><strong>主要是前两个配置，用于实现可以远程访问，如果只需要本地访问，则无需修改。</strong></p></blockquote></li><li><p>拷贝修改后的文件到远程服务器的 <code>/home/docker/redis/conf</code>下</p></li><li><p>启动容器：</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run -p <span class="token number">6379</span>:6379 --name redis -v /home/docker/redis/conf/redis.conf:/etc/redis/redis.conf -v /home/docker/redis/data:/data -d redis redis-server /etc/redis/redis.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><blockquote><ol><li><code>-p 6379:6379</code>：把容器内的6379端口映射到宿主机6379端口。</li><li><code>--name redis</code>：指定容器名称。</li><li><code>-v /home/docker/redis/conf/redis.conf:/etc/redis/redis.conf</code>：把宿主机配置好的redis.conf放到容器内的这个位置中。</li><li><code>-v /home/docker/redis/data:/data</code>：把redis持久化的数据映射在宿主机内。</li><li><code>-d</code>：以守护进程的方式启动容器。<br>redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf：让redis按照redis.conf的配置启动。</li></ol></blockquote></li><li><p>使用<code>docker ps</code>检查是否启动成功：</p><p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204240118120.png" alt="启动成功"></p></li></ol><h2 id="本地连接远程服务器的Redis"><a href="#本地连接远程服务器的Redis" class="headerlink" title="本地连接远程服务器的Redis"></a>本地连接远程服务器的Redis</h2><blockquote><p>Another Redis Desktop Manager 介绍</p></blockquote><p>Another Redis Desktop Manager是一款将Redis操作可视化的软件。</p><p>下载：<a href="https://github.com/qishibo/AnotherRedisDesktopManager">https://github.com/qishibo/AnotherRedisDesktopManager</a></p><p>下载完成后新建连接，在地址处输入服务器的ip地址和端口号，如有密码也进行输入，点击连接即可。</p><p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204240122561.png" alt="新建远程链接"></p><p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204240124057.png" alt="连接成功"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>博客搭建教程</title>
       <link href="/qzk.github.io/2022/04/20/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/"/>
       <url>/qzk.github.io/2022/04/20/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/</url>
