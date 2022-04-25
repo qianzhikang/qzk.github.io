@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="关于云服务器上的Redis, blogs from qzk">
-    <meta name="description" content="使用可视化工具连接云服务器Redis失败？起因在云服务器上使用Docker安装Redis,想要实现向MySQL一样，可以远程可视化访问。可视化工具使用Another Redis Desktop Manager,初次尝试连接失败了，原因是远程">
+    <meta name="keywords" content="Nginx入门, blogs from qzk">
+    <meta name="description" content="Nginx入门本文将带你入门Ngxin，了解Nginx的几大用途，并且初步教会你使用Nginx部署你的前端项目！
+简介Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP&amp;#x2F;POP3&amp;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +29,7 @@
     </style>
 
 
-    <title>关于云服务器上的Redis | blogs from qzk</title>
+    <title>Nginx入门 | blogs from qzk</title>
     <link rel="icon" type="image/png" href="/qzk.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/qzk.github.io/libs/awesome/css/all.min.css">
@@ -233,12 +234,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/qzk.github.io/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/qzk.github.io/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">关于云服务器上的Redis</h1>
+                    <h1 class="description center-align post-title">Nginx入门</h1>
                 </div>
             </div>
         </div>
@@ -374,7 +375,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-04-24
+                    2022-04-25
                 </div>
                 
 
@@ -398,56 +399,298 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="使用可视化工具连接云服务器Redis失败？"><a href="#使用可视化工具连接云服务器Redis失败？" class="headerlink" title="使用可视化工具连接云服务器Redis失败？"></a>使用可视化工具连接云服务器Redis失败？</h1><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>在云服务器上使用Docker安装Redis,想要实现向MySQL一样，可以远程可视化访问。可视化工具使用<code>Another Redis Desktop Manager</code>,初次尝试连接失败了，原因是<code>远程的Redis默认不支持远程访问</code>。</p>
-<h2 id="安装并修改权限"><a href="#安装并修改权限" class="headerlink" title="安装并修改权限"></a>安装并修改权限</h2><h3 id="使用Docker安装Redis"><a href="#使用Docker安装Redis" class="headerlink" title="使用Docker安装Redis"></a>使用Docker安装Redis</h3><ol>
-<li><p>拉取redis</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull redis<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h1 id="Nginx入门"><a href="#Nginx入门" class="headerlink" title="Nginx入门"></a>Nginx入门</h1><p>本文将带你入门<code>Ngxin</code>，了解Nginx的几大用途，并且初步教会你使用Nginx部署你的前端项目！</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP&#x2F;POP3&#x2F;SMTP服务。</p>
+<p>其特点是占有内存少，并发能力强，事实上Nginx的并发能力在同类型的网页服务器中表现较好。Nginx代码完全用C语言从头写成。官方数据测试表明能够支持高达 50,000 个并发连接数的响应。</p>
+<h2 id="Nginx主要应用"><a href="#Nginx主要应用" class="headerlink" title="Nginx主要应用"></a>Nginx主要应用</h2><ul>
+<li><p>静态网站部署</p>
 </li>
-<li><p>创建文件</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> /home/docker/redis/<span class="token punctuation">&#123;</span>conf,data<span class="token punctuation">&#125;</span> -p<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>负载均衡</p>
 </li>
-<li><p>本地下载对应版本的redis，拷贝redis.conf，并修改部分内容 </p>
-<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204240109751.png" alt="redis.conf文件位置"></p>
-<blockquote>
-<p>更改redis.conf配置文件（更改前建议先备份原始文件，更改备份后的文件）：</p>
-<ol>
-<li>注释 <code>bind 127.0.0.1</code>。这里限制redis只能本地访问，注释掉之后使redis可以外部访问；</li>
-<li><code>protected-mode yes</code> 修改为 protected-mode no。默认yes，开启保护模式，限制仅本地访问，改为no之后使redis可以外部访问；</li>
-<li><code>daemonize no</code> 。默认no，当前界面将进入redis的命令行界面，exit强制退出或者关闭连接工具(putty,xshell等)都会导致redis进程退出。 改为yes意为以守护进程方式启动，该模式下，redis会在后台运行，并将进程pid号写入至redis.conf选项pidfile设置的文件中，此时redis将一直运行，除非手动kill该进程，如果改为yes会使以配置文件方式启动redis的方式失败。</li>
-<li><code>requirepass pwd</code>。这里的pwd是自己设置的密码，可以不开启，不开启表示无需密码即可连接。</li>
-<li><code>databases 16</code>。默认数据库个数16，可以不修改。</li>
-<li><code>appendonly no</code>。默认 no，表示不开启aof方式持久化，改为appendonly yes表示开启aof，可以不修改该配置。</li>
-</ol>
-<p><strong>主要是前两个配置，用于实现可以远程访问，如果只需要本地访问，则无需修改。</strong></p>
+<li><p>反向代理</p>
+</li>
+</ul>
+<h2 id="安装Nginx-amp-项目部署"><a href="#安装Nginx-amp-项目部署" class="headerlink" title="安装Nginx &amp; 项目部署"></a>安装Nginx &amp; 项目部署</h2><p>Nginx 官网：<a target="_blank" rel="noopener" href="http://nginx.org/">http://nginx.org/</a></p>
+<h3 id="Nginx-for-Windows"><a href="#Nginx-for-Windows" class="headerlink" title="Nginx for Windows"></a>Nginx for Windows</h3><blockquote>
+<p>下载windows版本支持的稳定版<code>Nginx</code></p>
 </blockquote>
-</li>
-<li><p>拷贝修改后的文件到远程服务器的 <code>/home/docker/redis/conf</code>下</p>
-</li>
-<li><p>启动容器：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run -p <span class="token number">6379</span>:6379 --name redis -v /home/docker/redis/conf/redis.conf:/etc/redis/redis.conf -v /home/docker/redis/data:/data -d redis redis-server /etc/redis/redis.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241358895.png" alt="进入下载页"></p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241359043.png" alt="下载稳定版"></p>
+<blockquote>
+<p>解压得到文件夹，<code>注意解压路径不要含有中文字符，否则可能启动失败！</code>双击 <code>exe</code> 执行文件 或 在此启动命令行（使用管理员权限），执行 <code>nginx.exe</code>。</p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241401040.png" alt="解压后的文件夹"></p>
+<blockquote>
+<p>访问 <code>localhost:80</code> 测试</p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241405594.png" alt="成功页面"></p>
+<h3 id="Windows-下部署前端项目"><a href="#Windows-下部署前端项目" class="headerlink" title="Windows 下部署前端项目"></a>Windows 下部署前端项目</h3><p><strong>Nginx根目录下的<code>/conf/nginx.conf</code>文件是Nginx的配置文件，要部署自己的项目需要做一些改变。</strong></p>
+<blockquote>
+<p>修改<code>nginx.conf</code>文件的<code>server</code>中的访问根目录</p>
+</blockquote>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">server &#123;
+    listen       80;  #代理监听的端口
+    server_name  localhost;
+    location &#x2F; &#123;
+        root   html&#x2F;dist;  #项目访问入口的根目录
+        index  index.html index.htm; #主页
+    &#125;
+    error_page   500 502 503 504  &#x2F;50x.html; #错误页面的配置
+    location &#x3D; &#x2F;50x.html &#123;
+        root   html;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <blockquote>
-<ol>
-<li><code>-p 6379:6379</code>：把容器内的6379端口映射到宿主机6379端口。</li>
-<li><code>--name redis</code>：指定容器名称。</li>
-<li><code>-v /home/docker/redis/conf/redis.conf:/etc/redis/redis.conf</code>：把宿主机配置好的redis.conf放到容器内的这个位置中。</li>
-<li><code>-v /home/docker/redis/data:/data</code>：把redis持久化的数据映射在宿主机内。</li>
-<li><code>-d</code>：以守护进程的方式启动容器。<br>redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf：让redis按照redis.conf的配置启动。</li>
-</ol>
+<p>将需要部署的前端项目打包</p>
 </blockquote>
-</li>
-<li><p>使用<code>docker ps</code>检查是否启动成功：</p>
-<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204240118120.png" alt="启动成功"></p>
-</li>
-</ol>
-<h2 id="本地连接远程服务器的Redis"><a href="#本地连接远程服务器的Redis" class="headerlink" title="本地连接远程服务器的Redis"></a>本地连接远程服务器的Redis</h2><blockquote>
-<p>Another Redis Desktop Manager 介绍</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> run build<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241421464.png" alt="生成的dist"></p>
+<blockquote>
+<p>将<code>dist</code>文件夹复制到Nginx根目录下的<code>/html</code>文件夹内，并且重启Nginx。</p>
 </blockquote>
-<p>Another Redis Desktop Manager是一款将Redis操作可视化的软件。</p>
-<p>下载：<a target="_blank" rel="noopener" href="https://github.com/qishibo/AnotherRedisDesktopManager">https://github.com/qishibo/AnotherRedisDesktopManager</a></p>
-<p>下载完成后新建连接，在地址处输入服务器的ip地址和端口号，如有密码也进行输入，点击连接即可。</p>
-<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204240122561.png" alt="新建远程链接"></p>
-<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204240124057.png" alt="连接成功"></p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241423536.png" alt="复制dist文件到目标目录下"></p>
+<p>在<code>Nginx根目录</code>下，管理员身份启动命令行，输入命令，重新加载配置文件。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nginx -s reload<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>重启后，再次访问<code>localhost:80</code></p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241416197.png" alt="成功访问项目"></p>
+<blockquote>
+<p>关闭 Nginx 进程命令</p>
+</blockquote>
+<p>安全退出（推荐），保存一些配置，慢慢关闭进程。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Nginx -s quit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>快速退出，直接停止进程。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Nginx -s stop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h3 id="Nginx-for-Docker"><a href="#Nginx-for-Docker" class="headerlink" title="Nginx for Docker"></a>Nginx for Docker</h3><p>这里主要以Docker拉取Nginx镜像，并且使用容器运行的方式，在云服务器上安装Nginx，一来比较方便，二来可以再回顾一下Docker的一些操作。</p>
+<blockquote>
+<p>拉取远程镜像</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> pull nginx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>查看拉取的镜像</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> images<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241432663.png" alt="拉取的Nginx镜像"></p>
+<blockquote>
+<p>使用镜像创建并启动容器测试</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run -d --name mynginx -p <span class="token number">80</span>:80 nginx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>-d  ：后台守护运行</li>
+<li>–name ：容器名字（自定义）</li>
+<li>-p 80:80 ：将容器的80端口映射为宿主机的80端口</li>
+<li>nginx ：镜像的名字</li>
+</ul>
+<p><strong><code>注意，这里需要ECS的 80 端口开启访问，否则会被防火墙拦截！</code></strong></p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241439677.png" alt="测试访问远程nginx"></p>
+<p>到这里，基于docker镜像的nginx的linux安装已经完成了，但是如果想要像上文一样部署项目，则需要进入容器内部修改配置文件。</p>
+<blockquote>
+<p>查看容器下的配置文件</p>
+</blockquote>
+<p>容器运行后，会在容器内的 <code>/etc/nginx</code> 下生成 <code>nginx.conf</code>，使用docker命令进入容器内部查看，容器id可以使用 <code>docker ps</code>查看。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it 容器id <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241450817.png" alt="容器内的nginx.conf"></p>
+<p>查看nginx.conf的内容</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> nginx.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241453969.png" alt="nginx.conf"></p>
+<p>查看<code>/etc/nginx/conf.d/*.conf</code>文件</p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241456908.png" alt="default.conf"></p>
+<p>退出容器</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">exit</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在这里就可以修改，进行项目的部署了。但是这种方式每次都要进入Docker容器内部进行操作，不便于操作，所以需要对配置文件和部署目录以及日志输出进行外部挂载，在宿主机上便于操作。</p>
+<h3 id="Linux-下挂载配置文件"><a href="#Linux-下挂载配置文件" class="headerlink" title="Linux 下挂载配置文件"></a>Linux 下挂载配置文件</h3><p>由于需要修改一些配置文件的映射关系，所以需要先将Nginx容器删除，再次创建的时，设置挂载目录。</p>
+<blockquote>
+<p>创建宿主机的挂载目录</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> /home/docker/nginx/<span class="token punctuation">&#123;</span>conf,html,logs<span class="token punctuation">&#125;</span> -p<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>命令在<code>/home/docker/nginx/</code>下创建了<code>conf,html,logs</code>三个文件夹。</p>
+<blockquote>
+<p>将容器内的配置文件拷贝到宿主机的挂载目录中</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token function">cp</span> 容器id:/etc/nginx/nginx.conf ./<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>表示将容器下的<code>/etc/nginx/nginx.conf</code>拷贝到当前目录。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token function">cp</span> 容器id:/etc/nginx/conf.d/default.conf ./conf/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>表示将容器下的<code>/etc/nginx/conf.d/default.conf</code>拷贝到当前目录下的<code>conf</code>文件夹下。</p>
+<blockquote>
+<p>停止容器运行并且删除容器</p>
+</blockquote>
+<p>停止运行种的容器</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> container stop 容器id<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>删除容器</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token function">rm</span> 容器id<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>重新创建容器，并将配置挂载到宿主机</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run -d --name mynginx -p <span class="token number">80</span>:80 -v /home/docker/nginx/nginx.conf:/etc/nginx/nginx.conf -v /home/docker/nginx/logs:/var/log/nginx -v /home/docker/nginx/html:/usr/share/nginx/html -v /home/docker/nginx/conf:/etc/nginx/conf.d --privileged<span class="token operator">=</span>true 镜像名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>-v &#x2F;home&#x2F;docker&#x2F;nginx&#x2F;nginx.conf:&#x2F;etc&#x2F;nginx&#x2F;nginx.conf ：表示将当前<code>/home/docker/nginx/nginx.conf</code>文件映射为容器的<code>/etc/nginx/nginx.conf</code>文件</li>
+<li><code>logs</code>,<code>html</code>文件夹也是同理</li>
+<li><code>--privileged=true</code> ：表示容器内部对挂载的目录拥有读写等特权</li>
+</ul>
+<blockquote>
+<p>修改配置文件<code>/home/docker/nginx/conf/default.conf</code>的访问根目录。</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vim</span> default.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241520444.png" alt="image-20220424152021395"></p>
+<blockquote>
+<p>将需要部署的项目<code>dist</code>文件夹上传到云服务器的<code>/home/docker/nginx/html</code>下，并重新载入nginx的配置。</p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241526833.png" alt="将dist拷贝到html下"></p>
+<p>进入容器</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it 容器id <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>重新载入 nginx 配置</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nginx -s reload<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>访问远程 nginx 测试  （http:&#x2F;&#x2F;远程主机IP:80&#x2F;）</p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204241530914.png" alt="成功访问"></p>
+<blockquote>
+<p>多  <code>location&#123;&#125;</code> 的配置时，指定目录不是使用<code>root</code>,而是使用 <code>alias</code>。</p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204242343653.png" alt="多location配置"></p>
+<h3 id="Nginx-for-Linux"><a href="#Nginx-for-Linux" class="headerlink" title="Nginx for Linux"></a>Nginx for Linux</h3><p>下载 Linux 的压缩包，上传服务器端</p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204242157449.png" alt="linux版"></p>
+<blockquote>
+<p>解压</p>
+</blockquote>
+<p>来到存放压缩包的目录</p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204242231044.png" alt="压缩文件"></p>
+<p>命令解压</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> -zxvf nginx-1.18.0.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>源码编译安装</p>
+</blockquote>
+<p>进入解压目录</p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204242233703.png" alt="nginx解压目录下"></p>
+<p>执行脚本进行安装前的配置工作</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./configure<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>执行安装</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>查看nginx被安装到了哪</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">whereis</span> nginx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204242238076.png" alt="查看nginx的安装目录"></p>
+<blockquote>
+<p>进入nginx的安装目录下的<code>sbin</code>，启动nginx</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /usr/local/nginx/sbin/
+./nginx  启动<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>可能遇到的问题</p>
+</blockquote>
+<p>80端口被占用，需要修改端口，然后reload重启遇到报错</p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204242242769.jpg" alt="reload 报错"></p>
+<p>解决方法，修改 nginx.conf 文件，将pid的注释去掉</p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204242244510.png" alt="image-20220424224432468"></p>
+<p>一些其他的命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./nginx -s stop  停止
+./nginx -s quit  安全退出
+./nginx -s reload  重新加载配置文件
+<span class="token function">ps</span> aux<span class="token operator">|</span><span class="token function">grep</span> nginx  查看nginx进程<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>访问测试</p>
+</blockquote>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204242229314.png" alt="访问成功"></p>
+<p><em>删除nginx：<code>rm -rf usr/local/nginx</code></em></p>
+<h2 id="反向代理-amp-负载均衡"><a href="#反向代理-amp-负载均衡" class="headerlink" title="反向代理 &amp; 负载均衡"></a>反向代理 &amp; 负载均衡</h2><p>普通项目下，客户端直接请求一个服务器，这个时候过多的客户端请求，会导致单个服务器负荷很大，这时候可以起同一个应用起在多个服务器上。这时客户端就需要访问不同的地址进行访问，但是我们希望客户端访问同一个地址进行访问，这就需要Nginx为服务实现反向代理。</p>
+<p>反向代理隐藏了真正的服务端，就像你每天使用百度的时候，只知道敲打<code>www.baidu.com</code>就可以打开百度搜索页面，但背后成千上万台百度服务器具体是哪一台提供的服务的，是黑盒的。只是访问这个代理服务器，它会把我们的请求转发到真实提供服务的服务器，从而请求回数据。</p>
+<ul>
+<li>普通访问：</li>
+</ul>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204250959333.png" alt="普通流程"></p>
+<ul>
+<li>反向代理：</li>
+</ul>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204250950382.png" alt="反向代理"></p>
+<h2 id="配置反向代理和负载均衡"><a href="#配置反向代理和负载均衡" class="headerlink" title="配置反向代理和负载均衡"></a>配置反向代理和负载均衡</h2><h3 id="测试环境准备"><a href="#测试环境准备" class="headerlink" title="测试环境准备"></a>测试环境准备</h3><blockquote>
+<p>新建一个SpringBoot项目，加入依赖</p>
+</blockquote>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--web依赖--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-web<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!--单元测试--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!--lombok--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.projectlombok<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>lombok<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>编写一个简单的控制器控制台打印访问记录信息</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@Slf4j</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">NginxController</span> <span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/hello"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"enter this service!!!!!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token string">"Hello"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>打包项目，控制台运行jar包，分别启动两个服务，8080端口 和 8081端口</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -jar nginx-proxy --server.port<span class="token operator">=</span><span class="token number">8080</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">java -jar nginx-proxy --server.port<span class="token operator">=</span><span class="token number">8081</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+
+
+<blockquote>
+<p>修改配置文件，设置负载均衡和代理</p>
+</blockquote>
+<p>修改<code>/nginx-1.20.2/conf/nginx.conf</code>文件</p>
+<p><img src="https://pic-go.oss-cn-shanghai.aliyuncs.com/typora-img/202204251223529.png" alt="配置代理"></p>
+<blockquote>
+<p>重新载入nginx配置，进行测试</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nginx -s reload<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>访问  <code>localhost/hello</code>，查看终端输出的信息，测试代理和负载均衡。</p>
 
                 
             </div>
@@ -474,7 +717,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://qianzhikang.github.io/qzk.github.io/qzk.github.io/2022/04/24/%E5%85%B3%E4%BA%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/">https://qianzhikang.github.io/qzk.github.io/qzk.github.io/2022/04/24/%E5%85%B3%E4%BA%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/</a>
+                    <a href="https://qianzhikang.github.io/qzk.github.io/qzk.github.io/2022/04/25/Nginx%E5%85%A5%E9%97%A8/">https://qianzhikang.github.io/qzk.github.io/qzk.github.io/2022/04/25/Nginx%E5%85%A5%E9%97%A8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -562,9 +805,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/qzk.github.io/2022/04/25/Nginx%E5%85%A5%E9%97%A8/">
                     <div class="card-image">
@@ -582,9 +826,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -593,6 +837,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -615,13 +860,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/qzk.github.io/2022/04/20/%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/">
+                <a href="/qzk.github.io/2022/04/24/%E5%85%B3%E4%BA%8E%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84Redis/">
                     <div class="card-image">
                         
                         
-                        <img src="/qzk.github.io/medias/featureimages/23.jpg" class="responsive-img" alt="博客搭建教程">
+                        <img src="/qzk.github.io/medias/featureimages/19.jpg" class="responsive-img" alt="关于云服务器上的Redis">
                         
-                        <span class="card-title">博客搭建教程</span>
+                        <span class="card-title">关于云服务器上的Redis</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -632,7 +877,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-24
                             </span>
                         <span class="publish-author">
                             
@@ -645,8 +890,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/qzk.github.io/tags/%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">教程</span>
+                    <a href="/qzk.github.io/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                    <a href="/qzk.github.io/tags/%E8%BF%90%E7%BB%B4/">
+                        <span class="chip bg-color">运维</span>
                     </a>
                     
                 </div>
